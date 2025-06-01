@@ -135,7 +135,7 @@ if __name__ == "__main__":
     btn_load = tk.Button(
         frame, text="📷 Pilih Gambar", command=load_image,
         font=("Arial", 12, "bold"),
-        bg="#81c784", fg="white",
+        bg="#3c8eba", fg="white",
         activebackground="#66bb6a", activeforeground="white"
     )
     btn_load.pack(pady=10)
