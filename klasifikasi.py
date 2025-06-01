@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     label_result = tk.Label(
         frame, text="Hasil Prediksi:\n-", font=("Arial", 14),
-        bg="#d7efd0", fg="#2e2e2e"
+        bg="#6986e5", fg="#2e2e2e"
     )
     label_result.pack(pady=10)
 
