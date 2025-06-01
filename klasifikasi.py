@@ -115,7 +115,7 @@ if __name__ == "__main__":
     else:
         model = train_model()
 
-    # ==== GUI ====
+    # GUI 
     window = tk.Tk()
     window.title("Klasifikasi Hewan vs Buah")
 
@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
     label_result = tk.Label(
         frame, text="Hasil Prediksi:\n-", font=("Arial", 14),
-        bg="#e3f2fd", fg="#2e2e2e"
+        bg="#d7efd0", fg="#2e2e2e"
     )
     label_result.pack(pady=10)
 
