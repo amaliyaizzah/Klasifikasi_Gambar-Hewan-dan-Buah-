@@ -12,6 +12,14 @@ BATCH_SIZE = 32
 EPOCHS = 20
 MODEL_PATH = 'model_hewan_buah.h5'
 
+INFO_PATH = 'model_info.txt'
+
+def count_total_images(dataset_dir='dataset'):
+    total = 0
+    for root, dirs, files in os.walk(dataset_dir):
+        total += len([f for f in files if f.lower().endswith(('.jpg', '.png', '.jpeg'))])
+    return total
+
 def train_model():
     print("Model belum ada, mulai training...")
     datagen = ImageDataGenerator(
@@ -109,13 +117,24 @@ def load_image():
         label_result.config(text=f"Gagal menampilkan gambar: {e}")
 
 if __name__ == "__main__":
-    if os.path.exists(MODEL_PATH):
-        print("Model ditemukan, langsung load model...")
-        model = load_model(MODEL_PATH)
-    else:
-        model = train_model()
+   current_count = count_total_images()
 
-    # GUI 
+if os.path.exists(MODEL_PATH) and os.path.exists(INFO_PATH):
+    with open(INFO_PATH, 'r') as f:
+        saved_count = int(f.read())
+else:
+    saved_count = -1  # Paksa latih ulang jika belum ada info
+
+if current_count != saved_count:
+    print("Dataset berubah atau model belum ada, melatih ulang model...")
+    model = train_model()
+    with open(INFO_PATH, 'w') as f:
+        f.write(str(current_count))
+else:
+    print("Model ditemukan dan dataset tidak berubah, langsung load model...")
+    model = load_model(MODEL_PATH)
+
+    # == GUI ==
     window = tk.Tk()
     window.title("Klasifikasi Hewan vs Buah")
 
